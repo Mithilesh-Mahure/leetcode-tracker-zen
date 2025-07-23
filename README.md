@@ -1,91 +1,96 @@
 # LeetCode Tracker Zen
 
-## Backend Setup
+A full-stack web app to track your LeetCode problems and solutions, built with React (Vite) frontend and Node.js/Express backend.
 
-1. Navigate to the backend folder:
-   ```sh
-   cd backend
-   ```
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-3. Start the backend server:
-   ```sh
-   npm start
-   ```
-   The backend will run on http://localhost:4000 by default.
+---
 
-# Welcome to your Lovable project
+## Features
+- Add, edit, and delete LeetCode problems
+- Add solutions to problems (with code, language, explanation, etc.)
+- Progress tracking and filtering
+- Import/export (local, backend import/export coming soon)
+- Deployed frontend (Vercel) and backend (Render)
 
-## Project info
+---
 
-**URL**: https://lovable.dev/projects/01475648-d8b1-476d-9f0d-8ac88987be36
+## Local Development
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/01475648-d8b1-476d-9f0d-8ac88987be36) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
+### 1. Clone the Repository
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+git clone https://github.com/YOUR-USERNAME/leetcode-tracker-zen.git
+cd leetcode-tracker-zen
 ```
 
-**Edit a file directly in GitHub**
+### 2. Start the Backend
+```sh
+cd backend
+npm install
+npm start
+```
+- The backend runs on [http://localhost:4000](http://localhost:4000)
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 3. Start the Frontend
+```sh
+cd ..
+npm install
+npm run dev
+```
+- The frontend runs on [http://localhost:5173](http://localhost:5173)
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Deployment
 
-## What technologies are used for this project?
+### Backend (Render)
+- Push your code to GitHub.
+- Create a new **Web Service** on [Render](https://dashboard.render.com/):
+  - Root Directory: `backend`
+  - Build Command: `npm install`
+  - Start Command: `npm start`
+- Set environment variables as needed in Render dashboard.
 
-This project is built with:
+### Frontend (Vercel)
+- Import your repo on [Vercel](https://vercel.com/).
+- Framework: Vite
+- Output Directory: `dist`
+- Set `VITE_API_URL` in Vercel project settings to your Render backend URL (e.g., `https://your-backend.onrender.com`)
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
-## How can I deploy this project?
+## Environment Variables
 
-Simply open [Lovable](https://lovable.dev/projects/01475648-d8b1-476d-9f0d-8ac88987be36) and click on Share -> Publish.
+### Frontend (Vite)
+- `.env` (for local dev):
+  ```
+  VITE_API_URL=http://localhost:4000
+  ```
+- On Vercel: Add `VITE_API_URL` in project settings.
 
-## Can I connect a custom domain to my Lovable project?
+### Backend (Express)
+- Add any secrets or API keys in Render's Environment tab.
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Troubleshooting
+- **Failed to load problems:**
+  - Check API URL in `src/services/problemApiService.ts` and Vercel env vars.
+  - Make sure backend is running and accessible.
+  - Check CORS: backend should have `app.use(cors())`.
+- **Failed to add solution:**
+  - Ensure backend has `/api/problems/:id/solutions` endpoint.
+  - Frontend should use `ProblemApiService.addSolution`.
+- **Import/export not working:**
+  - Currently works locally; backend-powered import/export coming soon.
+- **Deployment issues:**
+  - Check Render/Vercel logs for errors.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+---
+
+## Contributing
+Pull requests welcome! For major changes, open an issue first to discuss what you’d like to change.
+
+---
+
+## License
+[MIT](LICENSE)
+
