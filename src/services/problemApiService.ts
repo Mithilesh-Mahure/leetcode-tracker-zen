@@ -1,6 +1,6 @@
 import { Problem } from '@/types/problem';
 
-const API_URL = 'https://leetcode-tracker-zen.onrender.com/';
+const API_URL = 'https://leetcode-tracker-zen.onrender.com';
 
 export const ProblemApiService = {
   async getProblems(): Promise<Problem[]> {
