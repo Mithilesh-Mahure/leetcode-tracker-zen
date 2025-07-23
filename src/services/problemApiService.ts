@@ -1,6 +1,6 @@
 import { Problem } from '@/types/problem';
 
-const API_URL = 'http://localhost:4000/api/problems';
+const API_URL = 'https://leetcode-tracker-zen.onrender.com/';
 
 export const ProblemApiService = {
   async getProblems(): Promise<Problem[]> {
@@ -32,5 +32,15 @@ export const ProblemApiService = {
   async deleteProblem(id: string): Promise<void> {
     const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
     if (!res.ok) throw new Error('Failed to delete problem');
+  },
+
+  async addSolution(problemId: string, solution: any): Promise<any> {
+    const res = await fetch(`${API_URL}/${problemId}/solutions`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(solution),
+    });
+    if (!res.ok) throw new Error('Failed to add solution');
+    return res.json();
   },
 }; 

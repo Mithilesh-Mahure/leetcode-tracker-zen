@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ProblemService } from '@/services/problemService';
+import { ProblemApiService } from '@/services/problemApiService';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -91,15 +92,10 @@ export const AddSolutionDialog = ({ children, problemId, onSolutionAdded }: AddS
         githubUrl: formData.githubUrl || undefined
       };
 
-      const result = ProblemService.addSolution(problemId, solutionData);
-      
-      if (result) {
-        onSolutionAdded();
-        setOpen(false);
-        resetForm();
-      } else {
-        throw new Error('Failed to add solution');
-      }
+      await ProblemApiService.addSolution(problemId, solutionData);
+      onSolutionAdded();
+      setOpen(false);
+      resetForm();
     } catch (error) {
       toast({
         title: "Error",
